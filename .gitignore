@@ -1,0 +1,6 @@
+/toge
+*.log
+*.jsonl
+*.gz
+
+.idea
