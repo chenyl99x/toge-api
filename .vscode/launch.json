@@ -1,0 +1,117 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "启动开发环境",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cmd/main.go",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "ENV": "dev"
+            },
+            "args": [],
+            "showLog": true,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "启动测试环境",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cmd/main.go",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "ENV": "test"
+            },
+            "args": [],
+            "showLog": true,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "启动生产环境",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cmd/main.go",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "ENV": "production"
+            },
+            "args": [],
+            "showLog": true,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "数据库迁移 - 执行迁移",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cmd/migrate/main.go",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "ENV": "dev"
+            },
+            "args": [
+                "-action=up",
+                "-env=dev"
+            ],
+            "showLog": true,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "数据库迁移 - 查看状态",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cmd/migrate/main.go",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "ENV": "dev"
+            },
+            "args": [
+                "-action=status",
+                "-env=dev"
+            ],
+            "showLog": true,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "数据库迁移 - 回滚迁移",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cmd/migrate/main.go",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "ENV": "dev"
+            },
+            "args": [
+                "-action=down",
+                "-env=dev",
+                "-version=001"
+            ],
+            "showLog": true,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "代码生成器",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cmd/generate/main.go",
+            "cwd": "${workspaceFolder}",
+            "env": {},
+            "args": [
+                "-model=internal/model/user.go",
+                "-output=internal"
+            ],
+            "showLog": true,
+            "console": "integratedTerminal"
+        }
+    ]
+}

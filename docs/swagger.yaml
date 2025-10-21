@@ -1,53 +1,26 @@
 basePath: /
 definitions:
-  git_lulumia_fun_root_toge-api_internal_consts.ArtifactType:
-    enum:
-    - 花
-    - 羽
-    - 沙
-    - 杯
-    - 头
-    type: string
-    x-enum-varnames:
-    - ArtifactTypeFlower
-    - ArtifactTypePlume
-    - ArtifactTypeSand
-    - ArtifactTypeGoblet
-    - ArtifactTypeCirclet
-  git_lulumia_fun_root_toge-api_internal_domain.CreateArtifactRequest:
-    type: object
-  git_lulumia_fun_root_toge-api_internal_domain.CreateArtifactSetRequest:
+  github_com_chenyl99x_toge-api_internal_domain.CreateSpaceRequest:
     properties:
+      description:
+        example: 这是一个美好的空间
+        type: string
       name:
+        example: 我的空间
         type: string
-    type: object
-  git_lulumia_fun_root_toge-api_internal_domain.CreateNationRequest:
-    properties:
-      name:
-        type: string
-    type: object
-  git_lulumia_fun_root_toge-api_internal_domain.CreatePersonRequest:
-    properties:
-      address:
-        type: string
-      age:
+      owner_user_id:
+        example: 1
         type: integer
-      company:
+      type:
+        example: 情侣空间
         type: string
-      email:
-        type: string
-      gender:
-        type: string
-      name:
-        type: string
-      phone:
-        type: string
-      position:
-        type: string
-      status:
-        type: integer
+    required:
+    - description
+    - name
+    - owner_user_id
+    - type
     type: object
-  git_lulumia_fun_root_toge-api_internal_domain.CreateUserRequest:
+  github_com_chenyl99x_toge-api_internal_domain.CreateUserRequest:
     properties:
       avatar:
         example: https://example.com/avatar.jpg
@@ -73,45 +46,7 @@ definitions:
     - password
     - username
     type: object
-  git_lulumia_fun_root_toge-api_internal_domain.CreateVersionRequest:
-    properties:
-      name:
-        type: string
-    type: object
-  git_lulumia_fun_root_toge-api_internal_domain.UpdateArtifactRequest:
-    type: object
-  git_lulumia_fun_root_toge-api_internal_domain.UpdateArtifactSetRequest:
-    properties:
-      name:
-        type: string
-    type: object
-  git_lulumia_fun_root_toge-api_internal_domain.UpdateNationRequest:
-    properties:
-      name:
-        type: string
-    type: object
-  git_lulumia_fun_root_toge-api_internal_domain.UpdatePersonRequest:
-    properties:
-      address:
-        type: string
-      age:
-        type: integer
-      company:
-        type: string
-      email:
-        type: string
-      gender:
-        type: string
-      name:
-        type: string
-      phone:
-        type: string
-      position:
-        type: string
-      status:
-        type: integer
-    type: object
-  git_lulumia_fun_root_toge-api_internal_domain.UpdateUserRequest:
+  github_com_chenyl99x_toge-api_internal_domain.UpdateUserRequest:
     properties:
       avatar:
         example: https://example.com/avatar.jpg
@@ -133,105 +68,34 @@ definitions:
         example: john_doe
         type: string
     type: object
-  git_lulumia_fun_root_toge-api_internal_domain.UpdateVersionRequest:
+  github_com_chenyl99x_toge-api_internal_model.Space:
     properties:
-      name:
+      createdAt:
         type: string
-    type: object
-  git_lulumia_fun_root_toge-api_internal_model.Artifact:
-    properties:
-      artifact_set_id:
-        example: 1
-        type: integer
-      created_at:
-        example: "2023-01-01T00:00:00Z"
-        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
       description:
-        example: "1.0"
+        description: 描述
+        example: 这是一个美好的空间
         type: string
       id:
-        example: 1
         type: integer
       name:
-        example: "1.0"
+        description: 空间名称
+        example: 我的空间
         type: string
-      story:
-        example: "1.0"
-        type: string
+      owner_user_id:
+        description: 空间拥有者ID
+        example: 1
+        type: integer
       type:
-        allOf:
-        - $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_consts.ArtifactType'
-        example: 花
-      updated_at:
-        example: "2023-01-01T00:00:00Z"
+        description: 空间类型:情侣空间、家庭空间
+        example: 情侣空间
+        type: string
+      updatedAt:
         type: string
     type: object
-  git_lulumia_fun_root_toge-api_internal_model.ArtifactSet:
-    properties:
-      created_at:
-        example: "2023-01-01T00:00:00Z"
-        type: string
-      id:
-        example: 1
-        type: integer
-      name:
-        example: "1.0"
-        type: string
-      updated_at:
-        example: "2023-01-01T00:00:00Z"
-        type: string
-    type: object
-  git_lulumia_fun_root_toge-api_internal_model.Nation:
-    properties:
-      id:
-        example: 1
-        type: integer
-      name:
-        example: 蒙德
-        type: string
-    type: object
-  git_lulumia_fun_root_toge-api_internal_model.Person:
-    description: 人员信息
-    properties:
-      address:
-        example: 北京市朝阳区
-        type: string
-      age:
-        example: 25
-        type: integer
-      company:
-        example: 科技有限公司
-        type: string
-      created_at:
-        example: "2023-01-01T00:00:00Z"
-        type: string
-      email:
-        example: zhangsan@example.com
-        type: string
-      gender:
-        example: 男
-        type: string
-      id:
-        example: 1
-        type: integer
-      name:
-        example: 张三
-        type: string
-      phone:
-        example: "13800138000"
-        type: string
-      position:
-        example: 软件工程师
-        type: string
-      status:
-        description: '1: 在职, 0: 离职'
-        example: 1
-        type: integer
-      updated_at:
-        example: "2023-01-01T00:00:00Z"
-        type: string
-    type: object
-  git_lulumia_fun_root_toge-api_internal_model.User:
+  github_com_chenyl99x_toge-api_internal_model.User:
     description: 用户信息
     properties:
       avatar:
@@ -260,22 +124,7 @@ definitions:
         example: john_doe
         type: string
     type: object
-  git_lulumia_fun_root_toge-api_internal_model.Version:
-    properties:
-      created_at:
-        example: "2023-01-01T00:00:00Z"
-        type: string
-      id:
-        example: 1
-        type: integer
-      name:
-        example: "1.0"
-        type: string
-      updated_at:
-        example: "2023-01-01T00:00:00Z"
-        type: string
-    type: object
-  git_lulumia_fun_root_toge-api_pkg_pagination.PageResponse:
+  github_com_chenyl99x_toge-api_pkg_pagination.PageResponse:
     properties:
       data:
         description: 数据列表
@@ -298,7 +147,7 @@ definitions:
         description: 总页数
         type: integer
     type: object
-  git_lulumia_fun_root_toge-api_pkg_response.Response:
+  github_com_chenyl99x_toge-api_pkg_response.Response:
     properties:
       code:
         description: 状态码
@@ -311,6 +160,14 @@ definitions:
       message:
         description: 响应消息
         type: string
+    type: object
+  gorm.DeletedAt:
+    properties:
+      time:
+        type: string
+      valid:
+        description: Valid is true if Time is not NULL
+        type: boolean
     type: object
   internal_handler.LoginRequest:
     properties:
@@ -331,7 +188,7 @@ definitions:
       token:
         type: string
       user:
-        $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.User'
+        $ref: '#/definitions/github_com_chenyl99x_toge-api_internal_model.User'
     type: object
   internal_handler.RegisterRequest:
     properties:
@@ -370,422 +227,6 @@ info:
   title: toge API
   version: "1.0"
 paths:
-  /artifacts/:
-    get:
-      consumes:
-      - application/json
-      description: 获取所有Artifact列表（支持分页、排序和搜索）
-      parameters:
-      - description: 页码，默认为1
-        in: query
-        minimum: 1
-        name: page
-        type: integer
-      - description: 每页大小，默认为10，最大100
-        in: query
-        maximum: 100
-        minimum: 1
-        name: page_size
-        type: integer
-      - description: '排序字段：ID, ArtifactSetID, Name, '
-        in: query
-        name: sort_by
-        type: string
-      - description: 排序方向：asc, desc，默认为desc
-        in: query
-        name: sort_order
-        type: string
-      - description: 搜索关键词
-        in: query
-        name: keyword
-        type: string
-      - description: 搜索字段：Name, Description, ，不指定则在所有字段中搜索
-        in: query
-        name: search_by
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  allOf:
-                  - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_pagination.PageResponse'
-                  - properties:
-                      data:
-                        items:
-                          $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.Artifact'
-                        type: array
-                    type: object
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 获取所有Artifact
-      tags:
-      - artifacts
-    post:
-      consumes:
-      - application/json
-      description: 创建新的Artifact
-      parameters:
-      - description: Artifact信息
-        in: body
-        name: artifact
-        required: true
-        schema:
-          $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_domain.CreateArtifactRequest'
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.Artifact'
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 创建Artifact
-      tags:
-      - artifacts
-  /artifacts/{id}:
-    delete:
-      consumes:
-      - application/json
-      description: 根据ID删除Artifact
-      parameters:
-      - description: ArtifactID
-        in: path
-        name: id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  additionalProperties: true
-                  type: object
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 删除Artifact
-      tags:
-      - artifacts
-    get:
-      consumes:
-      - application/json
-      description: 根据ID获取Artifact详细信息
-      parameters:
-      - description: ArtifactID
-        in: path
-        name: id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.Artifact'
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 获取Artifact详情
-      tags:
-      - artifacts
-    put:
-      consumes:
-      - application/json
-      description: 根据ID更新Artifact信息
-      parameters:
-      - description: ArtifactID
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: Artifact更新信息
-        in: body
-        name: artifact
-        required: true
-        schema:
-          $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_domain.UpdateArtifactRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.Artifact'
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 更新Artifact
-      tags:
-      - artifacts
-  /artifactsets/:
-    get:
-      consumes:
-      - application/json
-      description: 获取所有ArtifactSet列表（支持分页、排序和搜索）
-      parameters:
-      - description: 页码，默认为1
-        in: query
-        minimum: 1
-        name: page
-        type: integer
-      - description: 每页大小，默认为10，最大100
-        in: query
-        maximum: 100
-        minimum: 1
-        name: page_size
-        type: integer
-      - description: '排序字段：ID, Name, '
-        in: query
-        name: sort_by
-        type: string
-      - description: 排序方向：asc, desc，默认为desc
-        in: query
-        name: sort_order
-        type: string
-      - description: 搜索关键词
-        in: query
-        name: keyword
-        type: string
-      - description: 搜索字段：Name, ，不指定则在所有字段中搜索
-        in: query
-        name: search_by
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  allOf:
-                  - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_pagination.PageResponse'
-                  - properties:
-                      data:
-                        items:
-                          $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.ArtifactSet'
-                        type: array
-                    type: object
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 获取所有ArtifactSet
-      tags:
-      - artifactsets
-    post:
-      consumes:
-      - application/json
-      description: 创建新的ArtifactSet
-      parameters:
-      - description: ArtifactSet信息
-        in: body
-        name: artifactset
-        required: true
-        schema:
-          $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_domain.CreateArtifactSetRequest'
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.ArtifactSet'
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 创建ArtifactSet
-      tags:
-      - artifactsets
-  /artifactsets/{id}:
-    delete:
-      consumes:
-      - application/json
-      description: 根据ID删除ArtifactSet
-      parameters:
-      - description: ArtifactSetID
-        in: path
-        name: id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  additionalProperties: true
-                  type: object
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 删除ArtifactSet
-      tags:
-      - artifactsets
-    get:
-      consumes:
-      - application/json
-      description: 根据ID获取ArtifactSet详细信息
-      parameters:
-      - description: ArtifactSetID
-        in: path
-        name: id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.ArtifactSet'
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 获取ArtifactSet详情
-      tags:
-      - artifactsets
-    put:
-      consumes:
-      - application/json
-      description: 根据ID更新ArtifactSet信息
-      parameters:
-      - description: ArtifactSetID
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: ArtifactSet更新信息
-        in: body
-        name: artifactset
-        required: true
-        schema:
-          $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_domain.UpdateArtifactSetRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.ArtifactSet'
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 更新ArtifactSet
-      tags:
-      - artifactsets
   /auth/login:
     post:
       consumes:
@@ -805,7 +246,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            - $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
             - properties:
                 data:
                   $ref: '#/definitions/internal_handler.LoginResponse'
@@ -813,11 +254,11 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
       summary: 用户登录
       tags:
       - 认证与校验
@@ -833,7 +274,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            - $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
             - properties:
                 data:
                   additionalProperties: true
@@ -856,15 +297,15 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            - $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.User'
+                  $ref: '#/definitions/github_com_chenyl99x_toge-api_internal_model.User'
               type: object
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
       security:
       - BearerAuth: []
       summary: 获取用户信息
@@ -889,23 +330,23 @@ paths:
           description: Created
           schema:
             allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            - $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.User'
+                  $ref: '#/definitions/github_com_chenyl99x_toge-api_internal_model.User'
               type: object
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
         "409":
           description: Conflict
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
       summary: 用户注册
       tags:
       - 认证与校验
@@ -921,7 +362,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            - $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
             - properties:
                 data:
                   additionalProperties: true
@@ -930,422 +371,41 @@ paths:
       summary: 健康检查
       tags:
       - 健康
-  /nations/:
-    get:
-      consumes:
-      - application/json
-      description: 获取所有Nation列表（支持分页、排序和搜索）
-      parameters:
-      - description: 页码，默认为1
-        in: query
-        minimum: 1
-        name: page
-        type: integer
-      - description: 每页大小，默认为10，最大100
-        in: query
-        maximum: 100
-        minimum: 1
-        name: page_size
-        type: integer
-      - description: '排序字段：ID, Name, '
-        in: query
-        name: sort_by
-        type: string
-      - description: 排序方向：asc, desc，默认为desc
-        in: query
-        name: sort_order
-        type: string
-      - description: 搜索关键词
-        in: query
-        name: keyword
-        type: string
-      - description: 搜索字段：Name, ，不指定则在所有字段中搜索
-        in: query
-        name: search_by
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  allOf:
-                  - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_pagination.PageResponse'
-                  - properties:
-                      data:
-                        items:
-                          $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.Nation'
-                        type: array
-                    type: object
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 获取所有Nation
-      tags:
-      - nations
+  /space:
     post:
       consumes:
       - application/json
-      description: 创建新的Nation
+      description: 创建空间
       parameters:
-      - description: Nation信息
+      - description: 创建空间请求
         in: body
-        name: nation
+        name: space
         required: true
         schema:
-          $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_domain.CreateNationRequest'
+          $ref: '#/definitions/github_com_chenyl99x_toge-api_internal_domain.CreateSpaceRequest'
       produces:
       - application/json
       responses:
         "201":
-          description: Created
+          description: 创建成功
           schema:
             allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            - $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.Nation'
+                  $ref: '#/definitions/github_com_chenyl99x_toge-api_internal_model.Space'
               type: object
         "400":
-          description: Bad Request
+          description: 参数错误
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
         "500":
-          description: Internal Server Error
+          description: 服务器错误
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 创建Nation
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
+      summary: 创建空间
       tags:
-      - nations
-  /nations/{id}:
-    delete:
-      consumes:
-      - application/json
-      description: 根据ID删除Nation
-      parameters:
-      - description: NationID
-        in: path
-        name: id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  additionalProperties: true
-                  type: object
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 删除Nation
-      tags:
-      - nations
-    get:
-      consumes:
-      - application/json
-      description: 根据ID获取Nation详细信息
-      parameters:
-      - description: NationID
-        in: path
-        name: id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.Nation'
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 获取Nation详情
-      tags:
-      - nations
-    put:
-      consumes:
-      - application/json
-      description: 根据ID更新Nation信息
-      parameters:
-      - description: NationID
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: Nation更新信息
-        in: body
-        name: nation
-        required: true
-        schema:
-          $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_domain.UpdateNationRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.Nation'
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 更新Nation
-      tags:
-      - nations
-  /persons/:
-    get:
-      consumes:
-      - application/json
-      description: 获取所有Person列表（支持分页、排序和搜索）
-      parameters:
-      - description: 页码，默认为1
-        in: query
-        minimum: 1
-        name: page
-        type: integer
-      - description: 每页大小，默认为10，最大100
-        in: query
-        maximum: 100
-        minimum: 1
-        name: page_size
-        type: integer
-      - description: '排序字段：ID, Name, Status, '
-        in: query
-        name: sort_by
-        type: string
-      - description: 排序方向：asc, desc，默认为desc
-        in: query
-        name: sort_order
-        type: string
-      - description: 搜索关键词
-        in: query
-        name: keyword
-        type: string
-      - description: 搜索字段：Name, Email, ，不指定则在所有字段中搜索
-        in: query
-        name: search_by
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  allOf:
-                  - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_pagination.PageResponse'
-                  - properties:
-                      data:
-                        items:
-                          $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.Person'
-                        type: array
-                    type: object
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 获取所有Person
-      tags:
-      - persons
-    post:
-      consumes:
-      - application/json
-      description: 创建新的Person
-      parameters:
-      - description: Person信息
-        in: body
-        name: person
-        required: true
-        schema:
-          $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_domain.CreatePersonRequest'
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.Person'
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 创建Person
-      tags:
-      - persons
-  /persons/{id}:
-    delete:
-      consumes:
-      - application/json
-      description: 根据ID删除Person
-      parameters:
-      - description: PersonID
-        in: path
-        name: id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  additionalProperties: true
-                  type: object
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 删除Person
-      tags:
-      - persons
-    get:
-      consumes:
-      - application/json
-      description: 根据ID获取Person详细信息
-      parameters:
-      - description: PersonID
-        in: path
-        name: id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.Person'
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 获取Person详情
-      tags:
-      - persons
-    put:
-      consumes:
-      - application/json
-      description: 根据ID更新Person信息
-      parameters:
-      - description: PersonID
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: Person更新信息
-        in: body
-        name: person
-        required: true
-        schema:
-          $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_domain.UpdatePersonRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.Person'
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 更新Person
-      tags:
-      - persons
+      - 空间
   /timezone/available:
     get:
       consumes:
@@ -1358,7 +418,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            - $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
             - properties:
                 data:
                   items:
@@ -1399,7 +459,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            - $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
             - properties:
                 data:
                   additionalProperties: true
@@ -1408,7 +468,7 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
       summary: 转换时区
       tags:
       - 时区
@@ -1424,7 +484,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            - $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
             - properties:
                 data:
                   additionalProperties: true
@@ -1441,7 +501,6 @@ paths:
       parameters:
       - description: 时间戳
         example: 1672531200
-        format: int64
         in: query
         name: timestamp
         required: true
@@ -1464,7 +523,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            - $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
             - properties:
                 data:
                   additionalProperties: true
@@ -1473,7 +532,7 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
       summary: 格式化时间
       tags:
       - 时区
@@ -1502,7 +561,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            - $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
             - properties:
                 data:
                   additionalProperties: true
@@ -1511,7 +570,7 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
       summary: 解析时间字符串
       tags:
       - 时区
@@ -1534,7 +593,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            - $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
             - properties:
                 data:
                   additionalProperties: true
@@ -1543,7 +602,7 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
       summary: 获取指定时区的时间
       tags:
       - 时区
@@ -1558,7 +617,7 @@ paths:
         name: user
         required: true
         schema:
-          $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_domain.CreateUserRequest'
+          $ref: '#/definitions/github_com_chenyl99x_toge-api_internal_domain.CreateUserRequest'
       produces:
       - application/json
       responses:
@@ -1566,19 +625,19 @@ paths:
           description: Created
           schema:
             allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            - $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.User'
+                  $ref: '#/definitions/github_com_chenyl99x_toge-api_internal_model.User'
               type: object
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
       summary: 创建用户
       tags:
       - 用户
@@ -1622,26 +681,26 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            - $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
             - properties:
                 data:
                   allOf:
-                  - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_pagination.PageResponse'
+                  - $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_pagination.PageResponse'
                   - properties:
                       data:
                         items:
-                          $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.User'
+                          $ref: '#/definitions/github_com_chenyl99x_toge-api_internal_model.User'
                         type: array
                     type: object
               type: object
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
       summary: 获取所有用户
       tags:
       - 用户
@@ -1663,7 +722,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            - $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
             - properties:
                 data:
                   additionalProperties: true
@@ -1672,11 +731,11 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
       summary: 删除用户
       tags:
       - 用户
@@ -1697,19 +756,19 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            - $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.User'
+                  $ref: '#/definitions/github_com_chenyl99x_toge-api_internal_model.User'
               type: object
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
       summary: 获取用户详情
       tags:
       - 用户
@@ -1728,7 +787,7 @@ paths:
         name: user
         required: true
         schema:
-          $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_domain.UpdateUserRequest'
+          $ref: '#/definitions/github_com_chenyl99x_toge-api_internal_domain.UpdateUserRequest'
       produces:
       - application/json
       responses:
@@ -1736,234 +795,26 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            - $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.User'
+                  $ref: '#/definitions/github_com_chenyl99x_toge-api_internal_model.User'
               type: object
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
+            $ref: '#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response'
       summary: 更新用户
       tags:
       - 用户
-  /versions/:
-    get:
-      consumes:
-      - application/json
-      description: 获取所有Version列表（支持分页、排序和搜索）
-      parameters:
-      - description: 页码，默认为1
-        in: query
-        minimum: 1
-        name: page
-        type: integer
-      - description: 每页大小，默认为10，最大100
-        in: query
-        maximum: 100
-        minimum: 1
-        name: page_size
-        type: integer
-      - description: '排序字段：ID, Name, '
-        in: query
-        name: sort_by
-        type: string
-      - description: 排序方向：asc, desc，默认为desc
-        in: query
-        name: sort_order
-        type: string
-      - description: 搜索关键词
-        in: query
-        name: keyword
-        type: string
-      - description: 搜索字段：Name, ，不指定则在所有字段中搜索
-        in: query
-        name: search_by
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  allOf:
-                  - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_pagination.PageResponse'
-                  - properties:
-                      data:
-                        items:
-                          $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.Version'
-                        type: array
-                    type: object
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 获取所有Version
-      tags:
-      - versions
-    post:
-      consumes:
-      - application/json
-      description: 创建新的Version
-      parameters:
-      - description: Version信息
-        in: body
-        name: version
-        required: true
-        schema:
-          $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_domain.CreateVersionRequest'
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.Version'
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 创建Version
-      tags:
-      - versions
-  /versions/{id}:
-    delete:
-      consumes:
-      - application/json
-      description: 根据ID删除Version
-      parameters:
-      - description: VersionID
-        in: path
-        name: id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  additionalProperties: true
-                  type: object
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 删除Version
-      tags:
-      - versions
-    get:
-      consumes:
-      - application/json
-      description: 根据ID获取Version详细信息
-      parameters:
-      - description: VersionID
-        in: path
-        name: id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.Version'
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 获取Version详情
-      tags:
-      - versions
-    put:
-      consumes:
-      - application/json
-      description: 根据ID更新Version信息
-      parameters:
-      - description: VersionID
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: Version更新信息
-        in: body
-        name: version
-        required: true
-        schema:
-          $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_domain.UpdateVersionRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-            - properties:
-                data:
-                  $ref: '#/definitions/git_lulumia_fun_root_toge-api_internal_model.Version'
-              type: object
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response'
-      summary: 更新Version
-      tags:
-      - versions
 securityDefinitions:
   BearerAuth:
     in: header

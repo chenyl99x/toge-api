@@ -14,14 +14,17 @@ import (
 var ProviderSet = wire.NewSet(
 	// Repository 层
 	repository.NewUserRepository,
+	repository.NewSpaceRepository,
 
 	// Service 层
 	service.NewUserService,
+	service.NewSpaceService,
 	// Handler 层
 	handler.NewAuthHandler,
 	handler.NewHealthHandler,
 	handler.NewTimezoneHandler,
 	handler.NewUserHandler,
+	handler.NewSpaceHandler,
 
 	// 提供 gin 引擎
 	ProvideGinEngine,

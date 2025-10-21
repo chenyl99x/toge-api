@@ -18,7 +18,7 @@ type Response struct {
 func Success(c *gin.Context, data interface{}) {
 	c.JSON(http.StatusOK, Response{
 		Code:    200,
-		Message: "success",
+		Message: "成功",
 		Data:    data,
 	})
 }
@@ -27,7 +27,7 @@ func Success(c *gin.Context, data interface{}) {
 func Created(c *gin.Context, data interface{}) {
 	c.JSON(http.StatusCreated, Response{
 		Code:    201,
-		Message: "created successfully",
+		Message: "创建成功",
 		Data:    data,
 	})
 }
@@ -68,10 +68,10 @@ func InternalServerError(c *gin.Context, message string) {
 
 // ValidationError 验证错误响应
 func ValidationError(c *gin.Context, message string) {
-	Error(c, http.StatusBadRequest, "validation error: "+message)
+	Error(c, http.StatusBadRequest, "校验错误: "+message)
 }
 
 // DatabaseError 数据库错误响应
 func DatabaseError(c *gin.Context, message string) {
-	Error(c, http.StatusInternalServerError, "database error: "+message)
+	Error(c, http.StatusInternalServerError, "数据库响应错误: "+message)
 }

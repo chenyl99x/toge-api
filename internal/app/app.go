@@ -23,6 +23,7 @@ type App struct {
 	AuthHandler     *handler.AuthHandler
 	HealthHandler   *handler.HealthHandler
 	UserHandler     *handler.UserHandler
+	SpaceHandler    *handler.SpaceHandler
 	TimezoneHandler *handler.TimezoneHandler
 }
 
@@ -32,6 +33,7 @@ func NewApp(
 	authHandler *handler.AuthHandler,
 	healthHandler *handler.HealthHandler,
 	userHandler *handler.UserHandler,
+	spaceHandler *handler.SpaceHandler,
 	timezoneHandler *handler.TimezoneHandler,
 ) *App {
 	return &App{
@@ -39,6 +41,7 @@ func NewApp(
 		AuthHandler:     authHandler,
 		HealthHandler:   healthHandler,
 		UserHandler:     userHandler,
+		SpaceHandler:    spaceHandler,
 		TimezoneHandler: timezoneHandler,
 	}
 }
@@ -142,6 +145,14 @@ func (app *App) SetupRoutes() {
 		users.GET("/:id", app.UserHandler.GetByID)
 		users.PUT("/:id", app.UserHandler.Update)
 		users.DELETE("/:id", app.UserHandler.Delete)
+	}
+
+	// 空间相关路由（需要认证）
+	spaces := app.Engine.Group("/space")
+	spaces.Use(middleware.AuthMiddleware())
+	{
+		spaces.POST("/", app.SpaceHandler.Create)
+
 	}
 
 	// 时区相关路由（不需要认证）

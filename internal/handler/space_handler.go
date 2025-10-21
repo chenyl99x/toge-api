@@ -1,0 +1,50 @@
+package handler
+
+import (
+	"github.com/chenyl99x/toge-api/internal/domain"
+	"github.com/chenyl99x/toge-api/internal/model"
+	"github.com/chenyl99x/toge-api/pkg/response"
+	"github.com/gin-gonic/gin"
+)
+
+type SpaceHandler struct {
+	spaceService domain.SpaceService
+}
+
+func NewSpaceHandler(spaceService domain.SpaceService) *SpaceHandler {
+	return &SpaceHandler{
+		spaceService: spaceService,
+	}
+}
+
+// Create CreateSpace godoc
+// @Summary 创建空间
+// @Description 创建空间
+// @Tags 空间
+// @Accept json
+// @Produce json
+// @Param space body domain.CreateSpaceRequest true "创建空间请求"
+// @Success 201 {object} response.Response{data=model.Space} "创建成功"
+// @Failure 400 {object} response.Response "参数错误"
+// @Failure 500 {object} response.Response "服务器错误"
+// @Router /space [post]
+func (h *SpaceHandler) Create(c *gin.Context) {
+	ctx := c.Request.Context()
+	var req domain.CreateSpaceRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		response.BadRequest(c, err.Error())
+		return
+	}
+	space := &model.Space{
+		Name:        req.Name,
+		Description: req.Description,
+		OwnerUserID: req.OwnerUserID,
+		Type:        req.Type,
+	}
+	if err := h.spaceService.Create(ctx, space); err != nil {
+		response.InternalServerError(c, err.Error())
+		return
+	}
+
+	response.Created(c, space)
+}

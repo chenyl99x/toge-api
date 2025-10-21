@@ -23,7 +23,10 @@ func InitializeApp() (*app.App, error) {
 	authHandler := handler.NewAuthHandler(userService)
 	healthHandler := handler.NewHealthHandler()
 	userHandler := handler.NewUserHandler(userService)
+	spaceRepository := repository.NewSpaceRepository()
+	spaceService := service.NewSpaceService(spaceRepository)
+	spaceHandler := handler.NewSpaceHandler(spaceService)
 	timezoneHandler := handler.NewTimezoneHandler()
-	appApp := app.NewApp(engine, authHandler, healthHandler, userHandler, timezoneHandler)
+	appApp := app.NewApp(engine, authHandler, healthHandler, userHandler, spaceHandler, timezoneHandler)
 	return appApp, nil
 }

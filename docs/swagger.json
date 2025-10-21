@@ -18,684 +18,6 @@
     "host": "localhost:8080",
     "basePath": "/",
     "paths": {
-        "/artifacts/": {
-            "get": {
-                "description": "获取所有Artifact列表（支持分页、排序和搜索）",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "artifacts"
-                ],
-                "summary": "获取所有Artifact",
-                "parameters": [
-                    {
-                        "minimum": 1,
-                        "type": "integer",
-                        "description": "页码，默认为1",
-                        "name": "page",
-                        "in": "query"
-                    },
-                    {
-                        "maximum": 100,
-                        "minimum": 1,
-                        "type": "integer",
-                        "description": "每页大小，默认为10，最大100",
-                        "name": "page_size",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "排序字段：ID, ArtifactSetID, Name, ",
-                        "name": "sort_by",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "排序方向：asc, desc，默认为desc",
-                        "name": "sort_order",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "搜索关键词",
-                        "name": "keyword",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "搜索字段：Name, Description, ，不指定则在所有字段中搜索",
-                        "name": "search_by",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "allOf": [
-                                                {
-                                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_pagination.PageResponse"
-                                                },
-                                                {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "data": {
-                                                            "type": "array",
-                                                            "items": {
-                                                                "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.Artifact"
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            ]
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "description": "创建新的Artifact",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "artifacts"
-                ],
-                "summary": "创建Artifact",
-                "parameters": [
-                    {
-                        "description": "Artifact信息",
-                        "name": "artifact",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_domain.CreateArtifactRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.Artifact"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/artifacts/{id}": {
-            "get": {
-                "description": "根据ID获取Artifact详细信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "artifacts"
-                ],
-                "summary": "获取Artifact详情",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "ArtifactID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.Artifact"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "description": "根据ID更新Artifact信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "artifacts"
-                ],
-                "summary": "更新Artifact",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "ArtifactID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "description": "Artifact更新信息",
-                        "name": "artifact",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_domain.UpdateArtifactRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.Artifact"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "description": "根据ID删除Artifact",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "artifacts"
-                ],
-                "summary": "删除Artifact",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "ArtifactID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/artifactsets/": {
-            "get": {
-                "description": "获取所有ArtifactSet列表（支持分页、排序和搜索）",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "artifactsets"
-                ],
-                "summary": "获取所有ArtifactSet",
-                "parameters": [
-                    {
-                        "minimum": 1,
-                        "type": "integer",
-                        "description": "页码，默认为1",
-                        "name": "page",
-                        "in": "query"
-                    },
-                    {
-                        "maximum": 100,
-                        "minimum": 1,
-                        "type": "integer",
-                        "description": "每页大小，默认为10，最大100",
-                        "name": "page_size",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "排序字段：ID, Name, ",
-                        "name": "sort_by",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "排序方向：asc, desc，默认为desc",
-                        "name": "sort_order",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "搜索关键词",
-                        "name": "keyword",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "搜索字段：Name, ，不指定则在所有字段中搜索",
-                        "name": "search_by",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "allOf": [
-                                                {
-                                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_pagination.PageResponse"
-                                                },
-                                                {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "data": {
-                                                            "type": "array",
-                                                            "items": {
-                                                                "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.ArtifactSet"
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            ]
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "description": "创建新的ArtifactSet",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "artifactsets"
-                ],
-                "summary": "创建ArtifactSet",
-                "parameters": [
-                    {
-                        "description": "ArtifactSet信息",
-                        "name": "artifactset",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_domain.CreateArtifactSetRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.ArtifactSet"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/artifactsets/{id}": {
-            "get": {
-                "description": "根据ID获取ArtifactSet详细信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "artifactsets"
-                ],
-                "summary": "获取ArtifactSet详情",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "ArtifactSetID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.ArtifactSet"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "description": "根据ID更新ArtifactSet信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "artifactsets"
-                ],
-                "summary": "更新ArtifactSet",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "ArtifactSetID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "description": "ArtifactSet更新信息",
-                        "name": "artifactset",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_domain.UpdateArtifactSetRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.ArtifactSet"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "description": "根据ID删除ArtifactSet",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "artifactsets"
-                ],
-                "summary": "删除ArtifactSet",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "ArtifactSetID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            }
-        },
         "/auth/login": {
             "post": {
                 "description": "用户登录并返回 JWT token",
@@ -726,7 +48,7 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                                    "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -742,13 +64,13 @@
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     }
                 }
@@ -778,7 +100,7 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                                    "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -819,13 +141,13 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                                    "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.User"
+                                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_internal_model.User"
                                         }
                                     }
                                 }
@@ -835,7 +157,7 @@
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     }
                 }
@@ -871,13 +193,13 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                                    "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.User"
+                                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_internal_model.User"
                                         }
                                     }
                                 }
@@ -887,19 +209,19 @@
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     },
                     "409": {
                         "description": "Conflict",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     }
                 }
@@ -924,7 +246,7 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                                    "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -941,110 +263,9 @@
                 }
             }
         },
-        "/nations/": {
-            "get": {
-                "description": "获取所有Nation列表（支持分页、排序和搜索）",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "nations"
-                ],
-                "summary": "获取所有Nation",
-                "parameters": [
-                    {
-                        "minimum": 1,
-                        "type": "integer",
-                        "description": "页码，默认为1",
-                        "name": "page",
-                        "in": "query"
-                    },
-                    {
-                        "maximum": 100,
-                        "minimum": 1,
-                        "type": "integer",
-                        "description": "每页大小，默认为10，最大100",
-                        "name": "page_size",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "排序字段：ID, Name, ",
-                        "name": "sort_by",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "排序方向：asc, desc，默认为desc",
-                        "name": "sort_order",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "搜索关键词",
-                        "name": "keyword",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "搜索字段：Name, ，不指定则在所有字段中搜索",
-                        "name": "search_by",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "allOf": [
-                                                {
-                                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_pagination.PageResponse"
-                                                },
-                                                {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "data": {
-                                                            "type": "array",
-                                                            "items": {
-                                                                "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.Nation"
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            ]
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            },
+        "/space": {
             "post": {
-                "description": "创建新的Nation",
+                "description": "创建空间",
                 "consumes": [
                     "application/json"
                 ],
@@ -1052,33 +273,33 @@
                     "application/json"
                 ],
                 "tags": [
-                    "nations"
+                    "空间"
                 ],
-                "summary": "创建Nation",
+                "summary": "创建空间",
                 "parameters": [
                     {
-                        "description": "Nation信息",
-                        "name": "nation",
+                        "description": "创建空间请求",
+                        "name": "space",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_domain.CreateNationRequest"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_internal_domain.CreateSpaceRequest"
                         }
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": "Created",
+                        "description": "创建成功",
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                                    "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.Nation"
+                                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_internal_model.Space"
                                         }
                                     }
                                 }
@@ -1086,534 +307,15 @@
                         }
                     },
                     "400": {
-                        "description": "Bad Request",
+                        "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     },
                     "500": {
-                        "description": "Internal Server Error",
+                        "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/nations/{id}": {
-            "get": {
-                "description": "根据ID获取Nation详细信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "nations"
-                ],
-                "summary": "获取Nation详情",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "NationID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.Nation"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "description": "根据ID更新Nation信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "nations"
-                ],
-                "summary": "更新Nation",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "NationID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "description": "Nation更新信息",
-                        "name": "nation",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_domain.UpdateNationRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.Nation"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "description": "根据ID删除Nation",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "nations"
-                ],
-                "summary": "删除Nation",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "NationID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/persons/": {
-            "get": {
-                "description": "获取所有Person列表（支持分页、排序和搜索）",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "persons"
-                ],
-                "summary": "获取所有Person",
-                "parameters": [
-                    {
-                        "minimum": 1,
-                        "type": "integer",
-                        "description": "页码，默认为1",
-                        "name": "page",
-                        "in": "query"
-                    },
-                    {
-                        "maximum": 100,
-                        "minimum": 1,
-                        "type": "integer",
-                        "description": "每页大小，默认为10，最大100",
-                        "name": "page_size",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "排序字段：ID, Name, Status, ",
-                        "name": "sort_by",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "排序方向：asc, desc，默认为desc",
-                        "name": "sort_order",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "搜索关键词",
-                        "name": "keyword",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "搜索字段：Name, Email, ，不指定则在所有字段中搜索",
-                        "name": "search_by",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "allOf": [
-                                                {
-                                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_pagination.PageResponse"
-                                                },
-                                                {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "data": {
-                                                            "type": "array",
-                                                            "items": {
-                                                                "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.Person"
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            ]
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "description": "创建新的Person",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "persons"
-                ],
-                "summary": "创建Person",
-                "parameters": [
-                    {
-                        "description": "Person信息",
-                        "name": "person",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_domain.CreatePersonRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.Person"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/persons/{id}": {
-            "get": {
-                "description": "根据ID获取Person详细信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "persons"
-                ],
-                "summary": "获取Person详情",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "PersonID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.Person"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "description": "根据ID更新Person信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "persons"
-                ],
-                "summary": "更新Person",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "PersonID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "description": "Person更新信息",
-                        "name": "person",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_domain.UpdatePersonRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.Person"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "description": "根据ID删除Person",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "persons"
-                ],
-                "summary": "删除Person",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "PersonID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     }
                 }
@@ -1638,7 +340,7 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                                    "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -1702,7 +404,7 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                                    "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -1719,7 +421,7 @@
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     }
                 }
@@ -1744,7 +446,7 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                                    "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -1777,7 +479,6 @@
                 "parameters": [
                     {
                         "type": "integer",
-                        "format": "int64",
                         "example": 1672531200,
                         "description": "时间戳",
                         "name": "timestamp",
@@ -1806,7 +507,7 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                                    "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -1823,7 +524,7 @@
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     }
                 }
@@ -1866,7 +567,7 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                                    "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -1883,7 +584,7 @@
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     }
                 }
@@ -1918,7 +619,7 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                                    "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -1935,7 +636,7 @@
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     }
                 }
@@ -1961,7 +662,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_domain.CreateUserRequest"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_internal_domain.CreateUserRequest"
                         }
                     }
                 ],
@@ -1971,13 +672,13 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                                    "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.User"
+                                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_internal_model.User"
                                         }
                                     }
                                 }
@@ -1987,13 +688,13 @@
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     }
                 }
@@ -2059,7 +760,7 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                                    "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -2067,7 +768,7 @@
                                         "data": {
                                             "allOf": [
                                                 {
-                                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_pagination.PageResponse"
+                                                    "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_pagination.PageResponse"
                                                 },
                                                 {
                                                     "type": "object",
@@ -2075,7 +776,7 @@
                                                         "data": {
                                                             "type": "array",
                                                             "items": {
-                                                                "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.User"
+                                                                "$ref": "#/definitions/github_com_chenyl99x_toge-api_internal_model.User"
                                                             }
                                                         }
                                                     }
@@ -2090,13 +791,13 @@
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     }
                 }
@@ -2130,13 +831,13 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                                    "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.User"
+                                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_internal_model.User"
                                         }
                                     }
                                 }
@@ -2146,13 +847,13 @@
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     }
                 }
@@ -2183,7 +884,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_domain.UpdateUserRequest"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_internal_domain.UpdateUserRequest"
                         }
                     }
                 ],
@@ -2193,13 +894,13 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                                    "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.User"
+                                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_internal_model.User"
                                         }
                                     }
                                 }
@@ -2209,19 +910,19 @@
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     }
                 }
@@ -2253,7 +954,7 @@
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                                    "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -2270,352 +971,13 @@
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/versions/": {
-            "get": {
-                "description": "获取所有Version列表（支持分页、排序和搜索）",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "versions"
-                ],
-                "summary": "获取所有Version",
-                "parameters": [
-                    {
-                        "minimum": 1,
-                        "type": "integer",
-                        "description": "页码，默认为1",
-                        "name": "page",
-                        "in": "query"
-                    },
-                    {
-                        "maximum": 100,
-                        "minimum": 1,
-                        "type": "integer",
-                        "description": "每页大小，默认为10，最大100",
-                        "name": "page_size",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "排序字段：ID, Name, ",
-                        "name": "sort_by",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "排序方向：asc, desc，默认为desc",
-                        "name": "sort_order",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "搜索关键词",
-                        "name": "keyword",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "搜索字段：Name, ，不指定则在所有字段中搜索",
-                        "name": "search_by",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "allOf": [
-                                                {
-                                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_pagination.PageResponse"
-                                                },
-                                                {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "data": {
-                                                            "type": "array",
-                                                            "items": {
-                                                                "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.Version"
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            ]
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "description": "创建新的Version",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "versions"
-                ],
-                "summary": "创建Version",
-                "parameters": [
-                    {
-                        "description": "Version信息",
-                        "name": "version",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_domain.CreateVersionRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.Version"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/versions/{id}": {
-            "get": {
-                "description": "根据ID获取Version详细信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "versions"
-                ],
-                "summary": "获取Version详情",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "VersionID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.Version"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "description": "根据ID更新Version信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "versions"
-                ],
-                "summary": "更新Version",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "VersionID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "description": "Version更新信息",
-                        "name": "version",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_domain.UpdateVersionRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.Version"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "description": "根据ID删除Version",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "versions"
-                ],
-                "summary": "删除Version",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "VersionID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_pkg_response.Response"
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
                     }
                 }
@@ -2623,75 +985,34 @@
         }
     },
     "definitions": {
-        "git_lulumia_fun_root_toge-api_internal_consts.ArtifactType": {
-            "type": "string",
-            "enum": [
-                "花",
-                "羽",
-                "沙",
-                "杯",
-                "头"
+        "github_com_chenyl99x_toge-api_internal_domain.CreateSpaceRequest": {
+            "type": "object",
+            "required": [
+                "description",
+                "name",
+                "owner_user_id",
+                "type"
             ],
-            "x-enum-varnames": [
-                "ArtifactTypeFlower",
-                "ArtifactTypePlume",
-                "ArtifactTypeSand",
-                "ArtifactTypeGoblet",
-                "ArtifactTypeCirclet"
-            ]
-        },
-        "git_lulumia_fun_root_toge-api_internal_domain.CreateArtifactRequest": {
-            "type": "object"
-        },
-        "git_lulumia_fun_root_toge-api_internal_domain.CreateArtifactSetRequest": {
-            "type": "object",
             "properties": {
+                "description": {
+                    "type": "string",
+                    "example": "这是一个美好的空间"
+                },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "我的空间"
+                },
+                "owner_user_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "type": {
+                    "type": "string",
+                    "example": "情侣空间"
                 }
             }
         },
-        "git_lulumia_fun_root_toge-api_internal_domain.CreateNationRequest": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string"
-                }
-            }
-        },
-        "git_lulumia_fun_root_toge-api_internal_domain.CreatePersonRequest": {
-            "type": "object",
-            "properties": {
-                "address": {
-                    "type": "string"
-                },
-                "age": {
-                    "type": "integer"
-                },
-                "company": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "gender": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "phone": {
-                    "type": "string"
-                },
-                "position": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "integer"
-                }
-            }
-        },
-        "git_lulumia_fun_root_toge-api_internal_domain.CreateUserRequest": {
+        "github_com_chenyl99x_toge-api_internal_domain.CreateUserRequest": {
             "type": "object",
             "required": [
                 "email",
@@ -2726,66 +1047,7 @@
                 }
             }
         },
-        "git_lulumia_fun_root_toge-api_internal_domain.CreateVersionRequest": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string"
-                }
-            }
-        },
-        "git_lulumia_fun_root_toge-api_internal_domain.UpdateArtifactRequest": {
-            "type": "object"
-        },
-        "git_lulumia_fun_root_toge-api_internal_domain.UpdateArtifactSetRequest": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string"
-                }
-            }
-        },
-        "git_lulumia_fun_root_toge-api_internal_domain.UpdateNationRequest": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string"
-                }
-            }
-        },
-        "git_lulumia_fun_root_toge-api_internal_domain.UpdatePersonRequest": {
-            "type": "object",
-            "properties": {
-                "address": {
-                    "type": "string"
-                },
-                "age": {
-                    "type": "integer"
-                },
-                "company": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "gender": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "phone": {
-                    "type": "string"
-                },
-                "position": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "integer"
-                }
-            }
-        },
-        "git_lulumia_fun_root_toge-api_internal_domain.UpdateUserRequest": {
+        "github_com_chenyl99x_toge-api_internal_domain.UpdateUserRequest": {
             "type": "object",
             "properties": {
                 "avatar": {
@@ -2815,145 +1077,44 @@
                 }
             }
         },
-        "git_lulumia_fun_root_toge-api_internal_domain.UpdateVersionRequest": {
+        "github_com_chenyl99x_toge-api_internal_model.Space": {
             "type": "object",
             "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "description": {
+                    "description": "描述",
+                    "type": "string",
+                    "example": "这是一个美好的空间"
+                },
+                "id": {
+                    "type": "integer"
+                },
                 "name": {
+                    "description": "空间名称",
+                    "type": "string",
+                    "example": "我的空间"
+                },
+                "owner_user_id": {
+                    "description": "空间拥有者ID",
+                    "type": "integer",
+                    "example": 1
+                },
+                "type": {
+                    "description": "空间类型:情侣空间、家庭空间",
+                    "type": "string",
+                    "example": "情侣空间"
+                },
+                "updatedAt": {
                     "type": "string"
                 }
             }
         },
-        "git_lulumia_fun_root_toge-api_internal_model.Artifact": {
-            "type": "object",
-            "properties": {
-                "artifact_set_id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "created_at": {
-                    "type": "string",
-                    "example": "2023-01-01T00:00:00Z"
-                },
-                "description": {
-                    "type": "string",
-                    "example": "1.0"
-                },
-                "id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "name": {
-                    "type": "string",
-                    "example": "1.0"
-                },
-                "story": {
-                    "type": "string",
-                    "example": "1.0"
-                },
-                "type": {
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_consts.ArtifactType"
-                        }
-                    ],
-                    "example": "花"
-                },
-                "updated_at": {
-                    "type": "string",
-                    "example": "2023-01-01T00:00:00Z"
-                }
-            }
-        },
-        "git_lulumia_fun_root_toge-api_internal_model.ArtifactSet": {
-            "type": "object",
-            "properties": {
-                "created_at": {
-                    "type": "string",
-                    "example": "2023-01-01T00:00:00Z"
-                },
-                "id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "name": {
-                    "type": "string",
-                    "example": "1.0"
-                },
-                "updated_at": {
-                    "type": "string",
-                    "example": "2023-01-01T00:00:00Z"
-                }
-            }
-        },
-        "git_lulumia_fun_root_toge-api_internal_model.Nation": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "name": {
-                    "type": "string",
-                    "example": "蒙德"
-                }
-            }
-        },
-        "git_lulumia_fun_root_toge-api_internal_model.Person": {
-            "description": "人员信息",
-            "type": "object",
-            "properties": {
-                "address": {
-                    "type": "string",
-                    "example": "北京市朝阳区"
-                },
-                "age": {
-                    "type": "integer",
-                    "example": 25
-                },
-                "company": {
-                    "type": "string",
-                    "example": "科技有限公司"
-                },
-                "created_at": {
-                    "type": "string",
-                    "example": "2023-01-01T00:00:00Z"
-                },
-                "email": {
-                    "type": "string",
-                    "example": "zhangsan@example.com"
-                },
-                "gender": {
-                    "type": "string",
-                    "example": "男"
-                },
-                "id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "name": {
-                    "type": "string",
-                    "example": "张三"
-                },
-                "phone": {
-                    "type": "string",
-                    "example": "13800138000"
-                },
-                "position": {
-                    "type": "string",
-                    "example": "软件工程师"
-                },
-                "status": {
-                    "description": "1: 在职, 0: 离职",
-                    "type": "integer",
-                    "example": 1
-                },
-                "updated_at": {
-                    "type": "string",
-                    "example": "2023-01-01T00:00:00Z"
-                }
-            }
-        },
-        "git_lulumia_fun_root_toge-api_internal_model.User": {
+        "github_com_chenyl99x_toge-api_internal_model.User": {
             "description": "用户信息",
             "type": "object",
             "properties": {
@@ -2992,28 +1153,7 @@
                 }
             }
         },
-        "git_lulumia_fun_root_toge-api_internal_model.Version": {
-            "type": "object",
-            "properties": {
-                "created_at": {
-                    "type": "string",
-                    "example": "2023-01-01T00:00:00Z"
-                },
-                "id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "name": {
-                    "type": "string",
-                    "example": "1.0"
-                },
-                "updated_at": {
-                    "type": "string",
-                    "example": "2023-01-01T00:00:00Z"
-                }
-            }
-        },
-        "git_lulumia_fun_root_toge-api_pkg_pagination.PageResponse": {
+        "github_com_chenyl99x_toge-api_pkg_pagination.PageResponse": {
             "type": "object",
             "properties": {
                 "data": {
@@ -3045,7 +1185,7 @@
                 }
             }
         },
-        "git_lulumia_fun_root_toge-api_pkg_response.Response": {
+        "github_com_chenyl99x_toge-api_pkg_response.Response": {
             "type": "object",
             "properties": {
                 "code": {
@@ -3062,6 +1202,18 @@
                 "message": {
                     "description": "响应消息",
                     "type": "string"
+                }
+            }
+        },
+        "gorm.DeletedAt": {
+            "type": "object",
+            "properties": {
+                "time": {
+                    "type": "string"
+                },
+                "valid": {
+                    "description": "Valid is true if Time is not NULL",
+                    "type": "boolean"
                 }
             }
         },
@@ -3092,7 +1244,7 @@
                     "type": "string"
                 },
                 "user": {
-                    "$ref": "#/definitions/git_lulumia_fun_root_toge-api_internal_model.User"
+                    "$ref": "#/definitions/github_com_chenyl99x_toge-api_internal_model.User"
                 }
             }
         },

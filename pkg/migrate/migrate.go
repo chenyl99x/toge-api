@@ -23,11 +23,12 @@ type Migration struct {
 // 迁移列表
 var migrations = []Migration{
 	{
-		Version:     "010",
+		Version:     "013",
 		Description: "Create initial tables",
 		Up: func() error {
 			return database.DB.AutoMigrate(
 				&model.User{},
+				&model.Space{},
 			)
 		},
 		Down: func() error {
