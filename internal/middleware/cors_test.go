@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"git.lulumia.fun/root/toge-api/pkg/config"
+	"github.com/chenyl99x/toge-api/pkg/config"
 	"net/http"
 	"net/http/httptest"
 	"testing"

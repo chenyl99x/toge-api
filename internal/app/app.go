@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"log"
 
-	"git.lulumia.fun/root/toge-api/internal/handler"
-	"git.lulumia.fun/root/toge-api/internal/middleware"
-	"git.lulumia.fun/root/toge-api/pkg/config"
-	"git.lulumia.fun/root/toge-api/pkg/database"
-	"git.lulumia.fun/root/toge-api/pkg/logger"
-	"git.lulumia.fun/root/toge-api/pkg/redis"
-	"git.lulumia.fun/root/toge-api/pkg/timezone"
+	"github.com/chenyl99x/toge-api/internal/handler"
+	"github.com/chenyl99x/toge-api/internal/middleware"
+	"github.com/chenyl99x/toge-api/pkg/config"
+	"github.com/chenyl99x/toge-api/pkg/database"
+	"github.com/chenyl99x/toge-api/pkg/logger"
+	"github.com/chenyl99x/toge-api/pkg/redis"
+	"github.com/chenyl99x/toge-api/pkg/timezone"
 
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
@@ -19,16 +19,11 @@ import (
 
 // App 应用结构体
 type App struct {
-	Engine             *gin.Engine
-	AuthHandler        *handler.AuthHandler
-	HealthHandler      *handler.HealthHandler
-	UserHandler        *handler.UserHandler
-	TimezoneHandler    *handler.TimezoneHandler
-	PersonHandler      *handler.PersonHandler
-	NationHandler      *handler.NationHandler
-	VersionHandler     *handler.VersionHandler
-	ArtifactSetHandler *handler.ArtifactSetHandler
-	ArtifactHandler    *handler.ArtifactHandler
+	Engine          *gin.Engine
+	AuthHandler     *handler.AuthHandler
+	HealthHandler   *handler.HealthHandler
+	UserHandler     *handler.UserHandler
+	TimezoneHandler *handler.TimezoneHandler
 }
 
 // NewApp 创建应用实例
@@ -38,23 +33,13 @@ func NewApp(
 	healthHandler *handler.HealthHandler,
 	userHandler *handler.UserHandler,
 	timezoneHandler *handler.TimezoneHandler,
-	personHandler *handler.PersonHandler,
-	nationHandler *handler.NationHandler,
-	versionHandler *handler.VersionHandler,
-	artifactSetHandler *handler.ArtifactSetHandler,
-	artifactHandler *handler.ArtifactHandler,
 ) *App {
 	return &App{
-		Engine:             engine,
-		AuthHandler:        authHandler,
-		HealthHandler:      healthHandler,
-		UserHandler:        userHandler,
-		TimezoneHandler:    timezoneHandler,
-		PersonHandler:      personHandler,
-		NationHandler:      nationHandler,
-		VersionHandler:     versionHandler,
-		ArtifactSetHandler: artifactSetHandler,
-		ArtifactHandler:    artifactHandler,
+		Engine:          engine,
+		AuthHandler:     authHandler,
+		HealthHandler:   healthHandler,
+		UserHandler:     userHandler,
+		TimezoneHandler: timezoneHandler,
 	}
 }
 
@@ -168,55 +153,6 @@ func (app *App) SetupRoutes() {
 		timezones.GET("/parse", app.TimezoneHandler.ParseTime)
 		timezones.GET("/format", app.TimezoneHandler.FormatTime)
 		timezones.GET("/convert", app.TimezoneHandler.ConvertTime)
-	}
-
-	person := app.Engine.Group("/persons")
-	{
-		person.GET("", app.PersonHandler.GetAll)
-		person.GET("/:id", app.PersonHandler.GetByID)
-		person.POST("", app.PersonHandler.Create)
-		person.PUT("/:id", app.PersonHandler.Update)
-		person.DELETE("/:id", app.PersonHandler.Delete)
-	}
-
-	// 国家与地区
-	nation := app.Engine.Group("/nation")
-	{
-		nation.GET("", app.NationHandler.GetAll)
-		nation.GET("/:id", app.NationHandler.GetByID)
-		nation.POST("", app.NationHandler.Create)
-		nation.PUT("/:id", app.NationHandler.Update)
-		nation.DELETE("/:id", app.NationHandler.Delete)
-	}
-
-	// 版本号
-	version := app.Engine.Group("/version")
-	{
-		version.GET("", app.VersionHandler.GetAll)
-		version.GET("/:id", app.VersionHandler.GetByID)
-		version.POST("", app.VersionHandler.Create)
-		version.PUT("/:id", app.VersionHandler.Update)
-		version.DELETE("/:id", app.VersionHandler.Delete)
-	}
-
-	// 圣遗物套装
-	artifactSet := app.Engine.Group("/artifact-set")
-	{
-		artifactSet.GET("", app.ArtifactSetHandler.GetAll)
-		artifactSet.GET("/:id", app.ArtifactSetHandler.GetByID)
-		artifactSet.POST("", app.ArtifactSetHandler.Create)
-		artifactSet.PUT("/:id", app.ArtifactSetHandler.Update)
-		artifactSet.DELETE("/:id", app.ArtifactSetHandler.Delete)
-	}
-
-	// 圣遗物
-	artifact := app.Engine.Group("/artifact")
-	{
-		artifact.GET("", app.ArtifactHandler.GetAll)
-		artifact.GET("/:id", app.ArtifactHandler.GetByID)
-		artifact.POST("", app.ArtifactHandler.Create)
-		artifact.PUT("/:id", app.ArtifactHandler.Update)
-		artifact.DELETE("/:id", app.ArtifactHandler.Delete)
 	}
 
 }

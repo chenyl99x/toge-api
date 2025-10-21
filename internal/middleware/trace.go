@@ -3,7 +3,7 @@ package middleware
 import (
 	"time"
 
-	"git.lulumia.fun/root/toge-api/pkg/logger"
+	"github.com/chenyl99x/toge-api/pkg/logger"
 
 	"github.com/gin-gonic/gin"
 )

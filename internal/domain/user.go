@@ -2,8 +2,9 @@ package domain
 
 import (
 	"context"
-	"git.lulumia.fun/root/toge-api/internal/model"
-	"git.lulumia.fun/root/toge-api/pkg/pagination"
+
+	"github.com/chenyl99x/toge-api/internal/model"
+	"github.com/chenyl99x/toge-api/pkg/pagination"
 )
 
 type UserRepository interface {

@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"git.lulumia.fun/root/toge-api/internal/model"
-	"git.lulumia.fun/root/toge-api/pkg/database"
-	"git.lulumia.fun/root/toge-api/pkg/logger"
+	"github.com/chenyl99x/toge-api/internal/model"
+	"github.com/chenyl99x/toge-api/pkg/database"
+	"github.com/chenyl99x/toge-api/pkg/logger"
 )
 
 // MigrationFunc 迁移函数类型
@@ -28,21 +28,11 @@ var migrations = []Migration{
 		Up: func() error {
 			return database.DB.AutoMigrate(
 				&model.User{},
-				&model.Person{},
-				&model.Nation{},
-				&model.Version{},
-				&model.ArtifactSet{},
-				&model.Artifact{},
 			)
 		},
 		Down: func() error {
 			return database.DB.Migrator().DropTable(
 				&model.User{},
-				&model.Person{},
-				&model.Nation{},
-				&model.Version{},
-				&model.ArtifactSet{},
-				&model.Artifact{},
 			)
 		},
 	},
@@ -191,7 +181,6 @@ func isApplied(appliedMigrations []string, version string) bool {
 func DropTables() error {
 	return database.DB.Migrator().DropTable(
 		&model.User{},
-		&model.Person{},
 		&model.Migration{},
 	)
 }

@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"time"
 
-	"git.lulumia.fun/root/toge-api/pkg/response"
-	"git.lulumia.fun/root/toge-api/pkg/timezone"
+	"github.com/chenyl99x/toge-api/pkg/response"
+	"github.com/chenyl99x/toge-api/pkg/timezone"
 
 	"github.com/gin-gonic/gin"
 )

@@ -3,11 +3,11 @@ package handler
 import (
 	"strconv"
 
-	"git.lulumia.fun/root/toge-api/internal/domain"
-	"git.lulumia.fun/root/toge-api/internal/model"
-	"git.lulumia.fun/root/toge-api/pkg/pagination"
-	"git.lulumia.fun/root/toge-api/pkg/password"
-	"git.lulumia.fun/root/toge-api/pkg/response"
+	"github.com/chenyl99x/toge-api/internal/domain"
+	"github.com/chenyl99x/toge-api/internal/model"
+	"github.com/chenyl99x/toge-api/pkg/pagination"
+	"github.com/chenyl99x/toge-api/pkg/password"
+	"github.com/chenyl99x/toge-api/pkg/response"
 
 	"github.com/gin-gonic/gin"
 )

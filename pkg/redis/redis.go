@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"git.lulumia.fun/root/toge-api/pkg/config"
+	"github.com/chenyl99x/toge-api/pkg/config"
 
 	"github.com/redis/go-redis/v9"
 )

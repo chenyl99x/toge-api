@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"git.lulumia.fun/root/toge-api/pkg/generator"
+	"github.com/chenyl99x/toge-api/pkg/generator"
 )
 
 func main() {

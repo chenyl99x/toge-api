@@ -3,10 +3,10 @@ package repository
 import (
 	"context"
 	"fmt"
-	"git.lulumia.fun/root/toge-api/internal/domain"
-	"git.lulumia.fun/root/toge-api/internal/model"
-	"git.lulumia.fun/root/toge-api/pkg/database"
-	"git.lulumia.fun/root/toge-api/pkg/pagination"
+	"github.com/chenyl99x/toge-api/internal/domain"
+	"github.com/chenyl99x/toge-api/internal/model"
+	"github.com/chenyl99x/toge-api/pkg/database"
+	"github.com/chenyl99x/toge-api/pkg/pagination"
 )
 
 type userRepository struct{}

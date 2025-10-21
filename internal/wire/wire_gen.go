@@ -7,10 +7,10 @@
 package wire
 
 import (
-	"git.lulumia.fun/root/toge-api/internal/app"
-	"git.lulumia.fun/root/toge-api/internal/handler"
-	"git.lulumia.fun/root/toge-api/internal/repository"
-	"git.lulumia.fun/root/toge-api/internal/service"
+	"github.com/chenyl99x/toge-api/internal/app"
+	"github.com/chenyl99x/toge-api/internal/handler"
+	"github.com/chenyl99x/toge-api/internal/repository"
+	"github.com/chenyl99x/toge-api/internal/service"
 )
 
 // Injectors from wire.go:
@@ -24,21 +24,6 @@ func InitializeApp() (*app.App, error) {
 	healthHandler := handler.NewHealthHandler()
 	userHandler := handler.NewUserHandler(userService)
 	timezoneHandler := handler.NewTimezoneHandler()
-	personRepository := repository.NewPersonRepository()
-	personService := service.NewPersonService(personRepository)
-	personHandler := handler.NewPersonHandler(personService)
-	nationRepository := repository.NewNationRepository()
-	nationService := service.NewNationService(nationRepository)
-	nationHandler := handler.NewNationHandler(nationService)
-	versionRepository := repository.NewVersionRepository()
-	versionService := service.NewVersionService(versionRepository)
-	versionHandler := handler.NewVersionHandler(versionService)
-	artifactSetRepository := repository.NewArtifactSetRepository()
-	artifactSetService := service.NewArtifactSetService(artifactSetRepository)
-	artifactSetHandler := handler.NewArtifactSetHandler(artifactSetService)
-	artifactRepository := repository.NewArtifactRepository()
-	artifactService := service.NewArtifactService(artifactRepository)
-	artifactHandler := handler.NewArtifactHandler(artifactService)
-	appApp := app.NewApp(engine, authHandler, healthHandler, userHandler, timezoneHandler, personHandler, nationHandler, versionHandler, artifactSetHandler, artifactHandler)
+	appApp := app.NewApp(engine, authHandler, healthHandler, userHandler, timezoneHandler)
 	return appApp, nil
 }

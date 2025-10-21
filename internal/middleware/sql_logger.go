@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"git.lulumia.fun/root/toge-api/pkg/database"
+	"github.com/chenyl99x/toge-api/pkg/database"
 
 	"github.com/gin-gonic/gin"
 )

@@ -4,9 +4,9 @@ import (
 	"runtime"
 	"time"
 
-	"git.lulumia.fun/root/toge-api/internal/middleware"
-	"git.lulumia.fun/root/toge-api/pkg/logger"
-	"git.lulumia.fun/root/toge-api/pkg/response"
+	"github.com/chenyl99x/toge-api/internal/middleware"
+	"github.com/chenyl99x/toge-api/pkg/logger"
+	"github.com/chenyl99x/toge-api/pkg/response"
 
 	"github.com/gin-gonic/gin"
 )

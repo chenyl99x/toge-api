@@ -22,12 +22,12 @@ import (
 	"log"
 	"os"
 
-	"git.lulumia.fun/root/toge-api/internal/app"
-	"git.lulumia.fun/root/toge-api/internal/wire"
-	"git.lulumia.fun/root/toge-api/pkg/config"
-	"git.lulumia.fun/root/toge-api/pkg/logger"
+	"github.com/chenyl99x/toge-api/internal/app"
+	"github.com/chenyl99x/toge-api/internal/wire"
+	"github.com/chenyl99x/toge-api/pkg/config"
+	"github.com/chenyl99x/toge-api/pkg/logger"
 
-	_ "git.lulumia.fun/root/toge-api/docs"
+	_ "github.com/chenyl99x/toge-api/docs"
 
 	"github.com/gin-gonic/gin"
 )

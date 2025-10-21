@@ -1,4 +1,4 @@
-module git.lulumia.fun/root/toge-api
+module github.com/chenyl99x/toge-api
 
 go 1.25.0
 

@@ -4,7 +4,7 @@ import (
 	"errors"
 	"time"
 
-	"git.lulumia.fun/root/toge-api/pkg/config"
+	"github.com/chenyl99x/toge-api/pkg/config"
 
 	"github.com/golang-jwt/jwt/v5"
 )

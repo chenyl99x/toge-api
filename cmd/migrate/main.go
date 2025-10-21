@@ -6,10 +6,10 @@ import (
 	"log"
 	"os"
 
-	"git.lulumia.fun/root/toge-api/pkg/config"
-	"git.lulumia.fun/root/toge-api/pkg/database"
-	"git.lulumia.fun/root/toge-api/pkg/logger"
-	"git.lulumia.fun/root/toge-api/pkg/migrate"
+	"github.com/chenyl99x/toge-api/pkg/config"
+	"github.com/chenyl99x/toge-api/pkg/database"
+	"github.com/chenyl99x/toge-api/pkg/logger"
+	"github.com/chenyl99x/toge-api/pkg/migrate"
 )
 
 func main() {
@@ -75,7 +75,10 @@ func main() {
 	case "reset":
 		fmt.Print("This will drop all tables and recreate them. Are you sure? (y/N): ")
 		var confirm string
-		fmt.Scanln(&confirm)
+		_, err := fmt.Scanln(&confirm)
+		if err != nil {
+			return
+		}
 		if confirm != "y" && confirm != "Y" {
 			fmt.Println("Operation cancelled")
 			os.Exit(0)

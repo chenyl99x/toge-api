@@ -1,9 +1,10 @@
 package middleware
 
 import (
-	"git.lulumia.fun/root/toge-api/pkg/config"
 	"net/http"
 	"strings"
+
+	"github.com/chenyl99x/toge-api/pkg/config"
 
 	"github.com/gin-gonic/gin"
 )

@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strings"
 
-	"git.lulumia.fun/root/toge-api/pkg/jwt"
+	"github.com/chenyl99x/toge-api/pkg/jwt"
 
 	"github.com/gin-gonic/gin"
 )

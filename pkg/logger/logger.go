@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"git.lulumia.fun/root/toge-api/pkg/config"
+	"github.com/chenyl99x/toge-api/pkg/config"
 	"gopkg.in/natefinch/lumberjack.v2"
 )
 

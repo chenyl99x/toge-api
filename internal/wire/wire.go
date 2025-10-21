@@ -4,7 +4,7 @@
 package wire
 
 import (
-	"git.lulumia.fun/root/toge-api/internal/app"
+	"github.com/chenyl99x/toge-api/internal/app"
 
 	"github.com/google/wire"
 )

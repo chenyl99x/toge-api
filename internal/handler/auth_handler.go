@@ -5,13 +5,13 @@ import (
 	"strings"
 	"time"
 
-	"git.lulumia.fun/root/toge-api/internal/domain"
-	"git.lulumia.fun/root/toge-api/internal/model"
-	"git.lulumia.fun/root/toge-api/pkg/jwt"
-	"git.lulumia.fun/root/toge-api/pkg/logger"
-	"git.lulumia.fun/root/toge-api/pkg/password"
-	"git.lulumia.fun/root/toge-api/pkg/redis"
-	"git.lulumia.fun/root/toge-api/pkg/response"
+	"github.com/chenyl99x/toge-api/internal/domain"
+	"github.com/chenyl99x/toge-api/internal/model"
+	"github.com/chenyl99x/toge-api/pkg/jwt"
+	"github.com/chenyl99x/toge-api/pkg/logger"
+	"github.com/chenyl99x/toge-api/pkg/password"
+	"github.com/chenyl99x/toge-api/pkg/redis"
+	"github.com/chenyl99x/toge-api/pkg/response"
 
 	"github.com/gin-gonic/gin"
 )

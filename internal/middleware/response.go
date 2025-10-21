@@ -1,9 +1,10 @@
 package middleware
 
 import (
-	"git.lulumia.fun/root/toge-api/pkg/logger"
-	"git.lulumia.fun/root/toge-api/pkg/response"
 	"net/http"
+
+	"github.com/chenyl99x/toge-api/pkg/logger"
+	"github.com/chenyl99x/toge-api/pkg/response"
 
 	"github.com/gin-gonic/gin"
 )
