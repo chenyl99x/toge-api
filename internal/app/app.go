@@ -152,6 +152,7 @@ func (app *App) SetupRoutes() {
 	spaces.Use(middleware.AuthMiddleware())
 	{
 		spaces.POST("/", app.SpaceHandler.Create)
+		spaces.GET("/:id", app.SpaceHandler.GetByID)
 
 	}
 
