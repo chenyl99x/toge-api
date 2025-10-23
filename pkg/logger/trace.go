@@ -11,7 +11,9 @@ import (
 type TraceID string
 
 // TraceIDKey 用于在 context 中存储 traceId 的键
-const TraceIDKey = "trace_id"
+type TraceIDKeyType struct{}
+
+var TraceIDKey = TraceIDKeyType{}
 
 // GenerateTraceID 生成新的 traceId
 func GenerateTraceID() TraceID {

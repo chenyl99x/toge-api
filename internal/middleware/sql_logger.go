@@ -16,22 +16,22 @@ func SQLLoggerMiddleware() gin.HandlerFunc {
 }
 
 // GetDBStats 获取数据库统计信息
-func GetDBStats() map[string]interface{} {
+func GetDBStats() map[string]any {
 	if database.DB == nil {
-		return map[string]interface{}{
+		return map[string]any{
 			"error": "Database not initialized",
 		}
 	}
 
 	sqlDB, err := database.DB.DB()
 	if err != nil {
-		return map[string]interface{}{
+		return map[string]any{
 			"error": err.Error(),
 		}
 	}
 
 	stats := sqlDB.Stats()
-	return map[string]interface{}{
+	return map[string]any{
 		"max_open_connections": stats.MaxOpenConnections,
 		"open_connections":     stats.OpenConnections,
 		"in_use":               stats.InUse,

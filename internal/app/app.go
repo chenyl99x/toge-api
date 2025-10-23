@@ -153,7 +153,7 @@ func (app *App) SetupRoutes() {
 	{
 		spaces.POST("/", app.SpaceHandler.Create)
 		spaces.GET("/:id", app.SpaceHandler.GetByID)
-
+		spaces.PUT("/:id", app.SpaceHandler.Update)
 	}
 
 	// 时区相关路由（不需要认证）

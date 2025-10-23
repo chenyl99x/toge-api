@@ -55,12 +55,17 @@ func InitLogger() {
 	writer := createLogWriter(config.GlobalConfig.Log)
 
 	var handler slog.Handler
-	if config.GlobalConfig.Log.Format == "json" {
+	switch config.GlobalConfig.Log.Format {
+	case "json":
 		handler = slog.NewJSONHandler(writer, &slog.HandlerOptions{
 			Level: level,
 		})
-	} else {
+	case "text":
 		handler = slog.NewTextHandler(writer, &slog.HandlerOptions{
+			Level: level,
+		})
+	default:
+		handler = slog.NewJSONHandler(writer, &slog.HandlerOptions{
 			Level: level,
 		})
 	}

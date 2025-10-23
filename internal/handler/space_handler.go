@@ -77,3 +77,51 @@ func (h *SpaceHandler) GetByID(c *gin.Context) {
 	}
 	response.Success(c, space)
 }
+
+// Update UpdateSpace godoc
+// @Summary 修改岛屿信息
+// @Description 修改岛屿信息，支持修改 name、owner_user_id、type、description 字段
+// @Tags 岛屿
+// @Accept json
+// @Produce json
+// @Param id path uint true "岛屿ID"
+// @Param space body domain.UpdateSpaceRequest true "修改岛屿请求"
+// @Success 200 {object} response.Response{data=model.Space} "修改成功"
+// @Failure 400 {object} response.Response "参数错误"
+// @Failure 404 {object} response.Response "岛屿不存在"
+// @Failure 500 {object} response.Response "服务器错误"
+// @Router /space/{id} [put]
+func (h *SpaceHandler) Update(c *gin.Context) {
+	ctx := c.Request.Context()
+	id, err := strconv.ParseUint(c.Param("id"), 10, 32)
+	if err != nil {
+		response.BadRequest(c, err.Error())
+		return
+	}
+
+	var req domain.UpdateSpaceRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		response.BadRequest(c, err.Error())
+		return
+	}
+
+	// 先获取现有的空间信息
+	space, err := h.spaceService.GetByID(ctx, uint(id))
+	if err != nil {
+		response.NotFound(c, err.Error())
+		return
+	}
+
+	// 更新字段
+	space.Name = req.Name
+	space.OwnerUserID = req.OwnerUserID
+	space.Type = req.Type
+	space.Description = req.Description
+
+	if err := h.spaceService.Update(ctx, space); err != nil {
+		response.InternalServerError(c, err.Error())
+		return
+	}
+
+	response.Success(c, space)
+}

@@ -23,24 +23,24 @@ func NewHealthHandler() *HealthHandler {
 // @Tags         健康
 // @Accept       json
 // @Produce      json
-// @Success      200  {object}  response.Response{data=map[string]interface{}}
+// @Success      200  {object}  response.Response{data=map[string]any}
 // @Router       /health [get]
 func (h *HealthHandler) Health(c *gin.Context) {
 	var m runtime.MemStats
 	runtime.ReadMemStats(&m)
 
-	healthInfo := map[string]interface{}{
+	healthInfo := map[string]any{
 		"status":    "healthy",
 		"timestamp": time.Now().Format(time.RFC3339),
 		"uptime":    time.Since(startTime).String(),
-		"system": map[string]interface{}{
+		"system": map[string]any{
 			"go_version":    runtime.Version(),
 			"go_os":         runtime.GOOS,
 			"go_arch":       runtime.GOARCH,
 			"num_cpu":       runtime.NumCPU(),
 			"num_goroutine": runtime.NumGoroutine(),
 		},
-		"memory": map[string]interface{}{
+		"memory": map[string]any{
 			"alloc":       m.Alloc,
 			"total_alloc": m.TotalAlloc,
 			"sys":         m.Sys,

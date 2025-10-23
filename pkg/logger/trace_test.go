@@ -38,7 +38,7 @@ func TestGetTraceID(t *testing.T) {
 	assert.Empty(t, traceID)
 
 	// 测试 nil context
-	traceID = GetTraceID(nil)
+	traceID = GetTraceID(context.TODO())
 	assert.Empty(t, traceID)
 
 	// 测试有 traceId 的 context

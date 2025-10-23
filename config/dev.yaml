@@ -28,7 +28,7 @@ redis:
 log:
   level: "debug"
   format: "json"
-  output: "stdout"   # 输出到所有目标：控制台、错误输出和文件，支持: stdout, stderr, file, both, all
+  output: "both"   # 输出到所有目标：控制台、错误输出和文件，支持: stdout, stderr, file, both, all
   file:
     path: "logs/app.jsonl"
     max_size: 1

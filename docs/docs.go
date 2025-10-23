@@ -271,7 +271,7 @@ const docTemplate = `{
         },
         "/space": {
             "post": {
-                "description": "创建空间",
+                "description": "创建岛屿",
                 "consumes": [
                     "application/json"
                 ],
@@ -279,12 +279,12 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "空间"
+                    "岛屿"
                 ],
-                "summary": "创建空间",
+                "summary": "创建岛屿",
                 "parameters": [
                     {
-                        "description": "创建空间请求",
+                        "description": "创建岛屿请求",
                         "name": "space",
                         "in": "body",
                         "required": true,
@@ -329,7 +329,7 @@ const docTemplate = `{
         },
         "/space/{id}": {
             "get": {
-                "description": "获取空间详情",
+                "description": "获取岛屿详情",
                 "consumes": [
                     "application/json"
                 ],
@@ -337,13 +337,13 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "空间"
+                    "岛屿"
                 ],
-                "summary": "获取空间详情",
+                "summary": "获取岛屿详情",
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "空间ID",
+                        "description": "岛屿ID",
                         "name": "id",
                         "in": "path",
                         "required": true
@@ -376,6 +376,75 @@ const docTemplate = `{
                     },
                     "404": {
                         "description": "空间不存在",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器错误",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "修改岛屿信息，支持修改 name、owner_user_id、type、description 字段",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "岛屿"
+                ],
+                "summary": "修改岛屿信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "岛屿ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "修改岛屿请求",
+                        "name": "space",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_internal_domain.UpdateSpaceRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "修改成功",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_internal_model.Space"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
+                        }
+                    },
+                    "404": {
+                        "description": "岛屿不存在",
                         "schema": {
                             "$ref": "#/definitions/github_com_chenyl99x_toge-api_pkg_response.Response"
                         }
@@ -1115,6 +1184,33 @@ const docTemplate = `{
                 }
             }
         },
+        "github_com_chenyl99x_toge-api_internal_domain.UpdateSpaceRequest": {
+            "type": "object",
+            "required": [
+                "description",
+                "name",
+                "owner_user_id",
+                "type"
+            ],
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "example": "这是一个美好的空间"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "我的空间"
+                },
+                "owner_user_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "type": {
+                    "type": "string",
+                    "example": "情侣空间"
+                }
+            }
+        },
         "github_com_chenyl99x_toge-api_internal_domain.UpdateUserRequest": {
             "type": "object",
             "properties": {
@@ -1157,23 +1253,23 @@ const docTemplate = `{
                 "description": {
                     "description": "描述",
                     "type": "string",
-                    "example": "这是一个美好的空间"
+                    "example": "这是一个美好的岛屿"
                 },
                 "id": {
                     "type": "integer"
                 },
                 "name": {
-                    "description": "空间名称",
+                    "description": "岛屿名称",
                     "type": "string",
-                    "example": "我的空间"
+                    "example": "我的岛屿"
                 },
                 "owner_user_id": {
-                    "description": "空间拥有者ID",
+                    "description": "岛屿拥有者ID",
                     "type": "integer",
                     "example": 1
                 },
                 "type": {
-                    "description": "空间类型:情侣空间、家庭空间",
+                    "description": "岛屿类型:情侣空间、家庭空间",
                     "type": "string",
                     "example": "情侣空间"
                 },
