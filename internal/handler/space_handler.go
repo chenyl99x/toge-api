@@ -20,12 +20,12 @@ func NewSpaceHandler(spaceService domain.SpaceService) *SpaceHandler {
 }
 
 // Create CreateSpace godoc
-// @Summary 创建空间
-// @Description 创建空间
-// @Tags 空间
+// @Summary 创建岛屿
+// @Description 创建岛屿
+// @Tags 岛屿
 // @Accept json
 // @Produce json
-// @Param space body domain.CreateSpaceRequest true "创建空间请求"
+// @Param space body domain.CreateSpaceRequest true "创建岛屿请求"
 // @Success 201 {object} response.Response{data=model.Space} "创建成功"
 // @Failure 400 {object} response.Response "参数错误"
 // @Failure 500 {object} response.Response "服务器错误"
@@ -52,12 +52,12 @@ func (h *SpaceHandler) Create(c *gin.Context) {
 }
 
 // GetByID GetSpaceByID godoc
-// @Summary 获取空间详情
-// @Description 获取空间详情
-// @Tags 空间
+// @Summary 获取岛屿详情
+// @Description 获取岛屿详情
+// @Tags 岛屿
 // @Accept json
 // @Produce json
-// @Param id path uint true "空间ID"
+// @Param id path uint true "岛屿ID"
 // @Success 200 {object} response.Response{data=model.Space} "获取成功"
 // @Failure 400 {object} response.Response "参数错误"
 // @Failure 404 {object} response.Response "空间不存在"
